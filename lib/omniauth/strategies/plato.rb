@@ -6,15 +6,15 @@ module OmniAuth
       option :name, :plato
 
       option :client_options, {
-        :site => "http://subscriptions.teachtci.com",
-        :authorize_url => "http://subscriptions.teachtci.com/oauth/authorize"
+          :site => "http://subscriptions.teachtci.com",
+          :authorize_url => "http://subscriptions.teachtci.com/oauth/authorize"
       }
 
       uid { raw_info["teacher"]["id"] }
 
       info do
         {
-          :email => raw_info["teacher"]["email"]
+            :name => "#{raw_info["teacher"]["first_name"]} #{raw_info["teacher"]["last_name"]}"
         }
       end
 

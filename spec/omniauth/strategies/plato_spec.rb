@@ -13,10 +13,10 @@ describe OmniAuth::Strategies::Plato do
     end
   end
 
-  describe "email" do
-    it "should return email from raw_info if available" do
-      subject.stub!(:raw_info).and_return({"teacher" => { "email" => "test@example.com"}})
-      subject.info.should eq({:email => "test@example.com"})
+  describe "name" do
+    it "should return first and last name from raw_info if available" do
+      subject.stub!(:raw_info).and_return({"teacher" => { "first_name" => "John", "last_name" => "Kelly"}})
+      subject.info.should eq({:name => "John Kelly"})
     end
   end
 
