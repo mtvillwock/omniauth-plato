@@ -14,16 +14,48 @@ describe OmniAuth::Strategies::Plato do
   end
 
   describe "name" do
-    it "should return first and last name from raw_info if available" do
-      subject.stub!(:raw_info).and_return({"teacher" => { "first_name" => "John", "last_name" => "Kelly"}})
-      subject.info.should eq({:name => "John Kelly"})
+    context "teacher" do
+      it "should return first and last name from raw_info if available" do
+        subject.stub!(:raw_info).and_return({"teacher" => {"first_name" => "John", "last_name" => "Kelly"}})
+        subject.info.should == {:name => "John Kelly"}
+      end
+    end
+
+    context "coordinator" do
+      it "should return first and last name from raw_info if available" do
+        subject.stub!(:raw_info).and_return({"coordinator" => {"first_name" => "John", "last_name" => "Kelly"}})
+        subject.info.should == {:name => "John Kelly"}
+      end
+    end
+
+    context "admin" do
+      it "should return first and last name from raw_info if available" do
+        subject.stub!(:raw_info).and_return({"admin" => {"first_name" => "John", "last_name" => "Kelly"}})
+        subject.info.should == {:name => "John Kelly"}
+      end
     end
   end
 
   describe "uid" do
-    it "should return uid from raw_info if available" do
-      subject.stub!(:raw_info).and_return({"teacher" => { "id" => "9"}})
-      subject.uid.should eq("9")
+    context "teacher" do
+      it "should return uid from raw_info if available" do
+       subject.stub!(:raw_info).and_return({"teacher" => {"id" => "9"}})
+       subject.uid.should == "9"
+     end
+    end
+
+    context "coordinator" do
+      it "should return uid from raw_info if available" do
+       subject.stub!(:raw_info).and_return({"coordinator" => {"id" => "9"}})
+       subject.uid.should == "9"
+     end
+    end
+
+    context "admin" do
+      it "should return uid from raw_info if available" do
+       subject.stub!(:raw_info).and_return({"admin" => {"id" => "9"}})
+       subject.uid.should == "9"
+     end
     end
   end
 end
