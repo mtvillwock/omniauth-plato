@@ -14,7 +14,8 @@ module OmniAuth
 
       info do
         {
-            :name => "#{raw_info[staffer_type]["first_name"]} #{raw_info[staffer_type]["last_name"]}"
+            :name => "#{raw_info[staffer_type]["first_name"]} #{raw_info[staffer_type]["last_name"]}",
+            :user_type => staffer_type
         }
       end
 
@@ -29,7 +30,7 @@ module OmniAuth
       private
 
       def staffer_types
-        %w[teacher coordinator admin]
+        %w[teacher coordinator admin sysadmin]
       end
     end
   end

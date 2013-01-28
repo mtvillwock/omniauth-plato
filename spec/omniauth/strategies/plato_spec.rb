@@ -17,21 +17,21 @@ describe OmniAuth::Strategies::Plato do
     context "teacher" do
       it "should return first and last name from raw_info if available" do
         subject.stub!(:raw_info).and_return({"teacher" => {"first_name" => "John", "last_name" => "Kelly"}})
-        subject.info.should == {:name => "John Kelly"}
+        subject.info.should == {:name => "John Kelly", :user_type => "teacher"}
       end
     end
 
     context "coordinator" do
       it "should return first and last name from raw_info if available" do
         subject.stub!(:raw_info).and_return({"coordinator" => {"first_name" => "John", "last_name" => "Kelly"}})
-        subject.info.should == {:name => "John Kelly"}
+        subject.info.should == {:name => "John Kelly", :user_type => "coordinator"}
       end
     end
 
     context "admin" do
       it "should return first and last name from raw_info if available" do
         subject.stub!(:raw_info).and_return({"admin" => {"first_name" => "John", "last_name" => "Kelly"}})
-        subject.info.should == {:name => "John Kelly"}
+        subject.info.should == {:name => "John Kelly", :user_type => "admin"}
       end
     end
   end
