@@ -16,21 +16,21 @@ describe OmniAuth::Strategies::Plato do
   describe "name" do
     context "teacher" do
       it "should return first and last name from raw_info if available" do
-        subject.stub!(:raw_info).and_return({"teacher" => {"first_name" => "John", "last_name" => "Kelly"}})
+        subject.stub!(:raw_info).and_return({ "user" => { "teacher" => {"first_name" => "John", "last_name" => "Kelly" }}})
         subject.info.should == {:name => "John Kelly", :user_type => "teacher", :customer_number => nil}
       end
     end
 
     context "coordinator" do
       it "should return first and last name from raw_info if available" do
-        subject.stub!(:raw_info).and_return({"coordinator" => {"first_name" => "John", "last_name" => "Kelly"}})
+        subject.stub!(:raw_info).and_return({ "user" => { "coordinator" => {"first_name" => "John", "last_name" => "Kelly" }}})
         subject.info.should == {:name => "John Kelly", :user_type => "coordinator", :customer_number => nil}
       end
     end
 
     context "admin" do
       it "should return first and last name from raw_info if available" do
-        subject.stub!(:raw_info).and_return({"admin" => {"first_name" => "John", "last_name" => "Kelly"}})
+        subject.stub!(:raw_info).and_return({ "user" => { "admin" => {"first_name" => "John", "last_name" => "Kelly" }}})
         subject.info.should == {:name => "John Kelly", :user_type => "admin", :customer_number => nil}
       end
     end
@@ -39,21 +39,21 @@ describe OmniAuth::Strategies::Plato do
   describe "uid" do
     context "teacher" do
       it "should return uid from raw_info if available" do
-       subject.stub!(:raw_info).and_return({"teacher" => {"id" => "9"}})
+       subject.stub!(:raw_info).and_return({ "user" => { "teacher" => {"id" => "9" }}})
        subject.uid.should == "9"
      end
     end
 
     context "coordinator" do
       it "should return uid from raw_info if available" do
-       subject.stub!(:raw_info).and_return({"coordinator" => {"id" => "9"}})
+       subject.stub!(:raw_info).and_return({ "user" => { "coordinator" => {"id" => "9"}}})
        subject.uid.should == "9"
      end
     end
 
     context "admin" do
       it "should return uid from raw_info if available" do
-       subject.stub!(:raw_info).and_return({"admin" => {"id" => "9"}})
+       subject.stub!(:raw_info).and_return({ "user" => { "admin" => {"id" => "9" }}})
        subject.uid.should == "9"
      end
     end
@@ -61,7 +61,7 @@ describe OmniAuth::Strategies::Plato do
 
   describe "customer_number" do
     it "should return the customer number from the raw_info" do
-      subject.stub!(:raw_info).and_return({"teacher" => {"customer_number" => "QWERTY12345"}})
+      subject.stub!(:raw_info).and_return({ "user" => { "teacher" => { "id" => "9" }}, "customer_number" => "QWERTY12345" })
       subject.info[:customer_number].should == "QWERTY12345"
     end
   end

@@ -10,14 +10,18 @@ module OmniAuth
           :authorize_url => "http://subscriptions.teachtci.com/oauth/authorize"
       }
 
-      uid { raw_info[staffer_type]["id"] }
+      uid { raw_info["user"][staffer_type]["id"] }
 
       info do
         {
-            :name => "#{raw_info[staffer_type]["first_name"]} #{raw_info[staffer_type]["last_name"]}",
+            :name => "#{staffer["first_name"]} #{staffer["last_name"]}",
             :user_type => staffer_type,
-            :customer_number => raw_info[staffer_type]["customer_number"]
+            :customer_number => raw_info["customer_number"]
         }
+      end
+
+      def staffer
+        raw_info["user"][staffer_type]
       end
 
       def raw_info
@@ -25,7 +29,7 @@ module OmniAuth
       end
 
       def staffer_type
-        raw_info.keys.detect{|key| staffer_types.include?(key) }
+        raw_info["user"].keys.detect{|key| staffer_types.include?(key) }
       end
 
       private
