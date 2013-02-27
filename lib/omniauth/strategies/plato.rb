@@ -15,7 +15,8 @@ module OmniAuth
       info do
         {
             :name => "#{raw_info[staffer_type]["first_name"]} #{raw_info[staffer_type]["last_name"]}",
-            :user_type => staffer_type
+            :user_type => staffer_type,
+            :customer_number => raw_info[staffer_type]["customer_number"]
         }
       end
 
