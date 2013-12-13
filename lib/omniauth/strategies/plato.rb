@@ -10,32 +10,14 @@ module OmniAuth
           :authorize_url => "http://subscriptions.teachtci.com/oauth/authorize"
       }
 
-      uid { raw_info["user"][staffer_type]["id"] }
+      uid { access_token.get('/api/v1/user.json').parsed["user"]["sysadmin"]["id"] }
 
       info do
         {
-            :name => "#{staffer["first_name"]} #{staffer["last_name"]}",
-            :user_type => staffer_type,
-            :customer_number => raw_info["customer_number"]
+            :name => "TCI Syadmin",
+            :user_type => "sysadmin",
+            :customer_number => "TCI"
         }
-      end
-
-      def staffer
-        raw_info["user"][staffer_type]
-      end
-
-      def raw_info
-        @raw_info ||= access_token.get('/api/v1/user.json').parsed
-      end
-
-      def staffer_type
-        raw_info["user"].keys.detect{|key| staffer_types.include?(key) }
-      end
-
-      private
-
-      def staffer_types
-        %w[teacher coordinator admin sysadmin]
       end
     end
   end
